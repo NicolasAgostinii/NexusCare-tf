@@ -5,6 +5,8 @@
   - name: Instalar pré-requisitos
     shell: |
       echo "Inciando script"
+       cd  /home/ec2-user
+       git clone https://github.com/SidralLuiz/docker-tf.git
        yum update -y
        yum install -y curl
        yum install -y docker
