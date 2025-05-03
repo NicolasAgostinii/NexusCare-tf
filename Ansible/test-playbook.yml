@@ -6,8 +6,8 @@
     shell: |
       echo "Inciando script"
        yum update -y
-       yum install curl
-       amazon-linux-extras install docker
+       yum install -y curl
+       yum install -y docker
        service docker start
        usermod -a -G docker ec2-user
        curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
