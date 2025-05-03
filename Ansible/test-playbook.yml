@@ -18,7 +18,11 @@
   - name: Rodar Postgres
     shell: |
         echo "Rodando Docker Compose com postgres.yml"
-        docker-compose -f postgres.yml up -d
+        docker-compose -f /home/ec2-user/docker-tf/Docker-Db/postgres.yml up -d
     args:
         chdir: "{{ playbook_dir }}"
         executable: /bin/bash
+  - name: Rodar Back
+    shell: |
+        echo "Rodando Docker compose flask.yml"
+        docker-compose -f /home/ec2-user/docker-tf/Docker-Back/flask.yml up -d
