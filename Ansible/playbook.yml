@@ -1,0 +1,25 @@
+--- 
+- name: Instalar Docker e Rodar Postgres
+  hosts: all
+  remote_user: root
+  tasks:
+  - name: Instalar pré-requisitos
+    shell: |
+      echo "Inciando script"
+       yum update -y
+       yum install curl
+       amazon-linux-extras install docker
+       service docker start
+       usermod -a -G docker ec2-user
+       curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+       chmod +x /usr/local/bin/docker-compose
+       docker-compose version
+       docker ps 
+  - name: Rodar Postgres
+    shell: |
+        echo "Rodando Docker Compose com postgres.yml"
+        docker-compose -f postgres.yml up -d
+    args:
+        chdir: "{{ playbook_dir }}"
+        executable: /bin/bash
+
