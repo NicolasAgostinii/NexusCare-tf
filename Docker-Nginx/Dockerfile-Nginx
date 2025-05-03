@@ -2,5 +2,4 @@ FROM nginx:latest
 RUN apt-get update && apt install nginx
 WORKDIR -p /nginx
 EXPOSE 8080
-RUN sudo systemctl start nginx
-SHELL ["/bin/bash","-c"]
+CMD ["nginx"]
