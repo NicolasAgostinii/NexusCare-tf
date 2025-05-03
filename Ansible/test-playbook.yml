@@ -1,61 +1,27 @@
----
-- name: Instalar Docker, Docker Compose e rodar containers
+- name: Instalar Docker e Rodar Postgres
   hosts: all
-  become: true
-  vars:
-    docker_compose_path: /usr/local/bin/docker-compose
-    postgres_compose_file: /home/ec2-user/docker-tf/Docker-Db/postgres.yml
-    flask_compose_file: /home/ec2-user/docker-tf/Docker-Back/flask.yml
-
+  remote_user: root
   tasks:
-    - name: Atualizar pacotes
-      yum:
-        name: "*"
-        state: latest
-
-    - name: Instalar dependências
-      yum:
-        name:
-          - curl
-          - docker
-        state: present
-
-    - name: Iniciar e habilitar o serviço Docker
-      service:
-        name: docker
-        state: started
-        enabled: true
-
-    - name: Adicionar usuário ec2-user ao grupo docker
-      user:
-        name: ec2-user
-        groups: docker
-        append: yes
-
-    - name: Instalar Docker Compose
-      get_url:
-        url: "https://github.com/docker/compose/releases/latest/download/docker-compose-{{ ansible_system }}-{{ ansible_architecture }}"
-        dest: "{{ docker_compose_path }}"
-        mode: '0755'
-
-    - name: Verificar versão do Docker Compose
-      command: docker-compose --version
-      register: compose_version
-      changed_when: false
-
-    - debug:
-        var: compose_version.stdout
-
-    - name: Rodar PostgreSQL com docker-compose
-      docker_compose:
-        project_src: "{{ postgres_compose_file | dirname }}"
-        files:
-          - "{{ postgres_compose_file }}"
-        state: present
-
-    - name: Rodar Backend Flask com docker-compose
-      docker_compose:
-        project_src: "{{ flask_compose_file | dirname }}"
-        files:
-          - "{{ flask_compose_file }}"
-        state: present
+  - name: Instalar pré-requisitos
+    shell: |
+      echo "Inciando script"
+       yum update -y
+       yum install curl
+       amazon-linux-extras install docker
+       service docker start
+       usermod -a -G docker ec2-user
+       curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+       chmod +x /usr/local/bin/docker-compose
+       docker-compose version
+       docker ps 
+  - name: Rodar Postgres
+    shell: |
+        echo "Rodando Docker Compose com postgres.yml"
+        docker-compose -f /home/ec2-user/docker-tf/Docker-Db/postgres.yml up -d
+    args:
+        chdir: "{{ playbook_dir }}"
+        executable: /bin/bash
+  - name: Rodar Back
+    shell: |
+        echo "Rodando Docker compose flask.yml"
+        docker-compose -f /home/ec2-user/docker-tf/Docker-Back/flask.yml up -
