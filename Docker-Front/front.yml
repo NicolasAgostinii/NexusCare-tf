@@ -4,7 +4,7 @@ services:
   angular-app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-Front
     ports:
       - "80:4200"
     volumes:
