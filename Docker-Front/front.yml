@@ -1,10 +1,10 @@
 version: '3.8'
 
 services:
-  angular-app:
+  angular-app:  # Este é o nome do serviço - ele não deve ser "frontend" no nível raiz
     build:
       context: .
-      dockerfile: Dockerfile-Front
+      dockerfile: Dockerfile
     ports:
       - "80:4200"
     volumes:
