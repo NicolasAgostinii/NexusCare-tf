@@ -2,12 +2,15 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-RUN apk add --no-cache git
+# Instale o git E as ferramentas de compilação comuns
+# python3, make e g++ são frequentemente necessários para compilar dependências nativas do npm
+RUN apk add --no-cache git python3 make g++
 
 RUN git clone https://github.com/dennerborba/hackaton-front.git .
 
 RUN npm install -g @angular/cli@17.0.3
 
+# Agora execute npm install
 RUN npm install
 
 EXPOSE 4200
