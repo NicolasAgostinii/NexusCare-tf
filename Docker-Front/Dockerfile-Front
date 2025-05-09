@@ -1,1 +1,18 @@
+FROM node:18-alpine
 
+WORKDIR /app
+
+# Instalar Angular CLI versão específica
+RUN npm install -g @angular/cli@17.0.3
+
+# Copiar package.json e package-lock.json (se existirem)
+COPY ./app/package*.json ./
+
+# Instalar dependências
+RUN npm install
+
+# Expor a porta que o Angular usa
+EXPOSE 4200
+
+# Comando inicial (será sobrescrito pelo docker-compose)
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200", "--disable-host-check"]
