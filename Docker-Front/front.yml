@@ -1,7 +1,7 @@
   frontend:
     build:
       context: .
-      dockerfile: v1-frontend.dockerfile
+      dockerfile: Dockerfile-Front
     image: loesterbotelho/frontend:v1
     container_name: frontend
     restart: always    
