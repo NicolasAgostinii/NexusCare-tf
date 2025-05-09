@@ -1,1 +1,18 @@
-
+  frontend:
+    build:
+      context: .
+      dockerfile: v1-frontend.dockerfile
+    image: loesterbotelho/frontend:v1
+    container_name: frontend
+    restart: always    
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    environment:
+      - NODE_ENV=production
+    networks:
+      loester-network:
+        ipv4_address: 192.168.10.120
+    volumes:
+      - frontend_data:/app/data
