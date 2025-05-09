@@ -1,12 +1,12 @@
 version: '3.8'
 
 services:
-  angular-app:  # Este é o nome do serviço - ele não deve ser "frontend" no nível raiz
+  angular-app:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "80:4200"
+      - "80:4200"  # Este é o formato correto para um mapeamento de portas
     volumes:
       - ./app:/app
       - node_modules:/app/node_modules
