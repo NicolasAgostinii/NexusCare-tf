@@ -1,6 +1,7 @@
 FROM node:18-alpine
 
 WORKDIR /app
+RUN apt-get update && apt-get install -y git
 RUN git clone https://github.com/dennerborba/hackaton-front.git
 # Instalar Angular CLI versão específica
 RUN npm install -g @angular/cli@17.0.3
