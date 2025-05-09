@@ -2,7 +2,7 @@
     build:
       context: .
       dockerfile: Dockerfile-Front
-    image: loesterbotelho/frontend:v1
+    image: angular:17.0.3
     container_name: frontend
     restart: always    
     ports:
