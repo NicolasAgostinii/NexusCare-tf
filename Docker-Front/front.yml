@@ -4,7 +4,7 @@ services:
   angular-app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-Front
     ports:
       - "80:4200"  # Este é o formato correto para um mapeamento de portas
     volumes:
