@@ -2,17 +2,17 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Instale o git E as ferramentas de compilação comuns
-# python3, make e g++ são frequentemente necessários para compilar dependências nativas do npm
+# Instale o git e ferramentas necessárias para compilar dependências nativas
 RUN apk add --no-cache git python3 make g++
 
 RUN git clone https://github.com/dennerborba/hackaton-front.git .
 
 RUN npm install -g @angular/cli@17.0.3
 
-# Agora execute npm install
-CMD ["npm install"]
+# Instale as dependências do projeto
+RUN npm install
 
 EXPOSE 4200
 
+# Inicie o servidor Angular
 CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200", "--disable-host-check"]
