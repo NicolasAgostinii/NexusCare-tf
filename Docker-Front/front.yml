@@ -3,13 +3,14 @@ version: '3.8'
 services:
   angular-app:
     build:
-      context: .
+      context: ./hackaton-front/nexusCareFront
       dockerfile: Dockerfile-Front
     ports:
-      - "80:4200"  # Este é o formato correto para um mapeamento de portas
+      - "80:4200"
     volumes:
-      - ./app:/app
+      - ./hackaton-front/nexusCareFront:/app
       - node_modules:/app/node_modules
+    working_dir: /app
     command: npm start
     environment:
       - NODE_ENV=development
