@@ -1,12 +1,9 @@
 FROM node:18-alpine
 
-WORKDIR /app
-
+WORKDIR /hackaton-front/nexusCareFront
+COPY ./hackaton-front/nexusCareFront/ /hackaton-front/nexusCareFront/
 # Instale o git e ferramentas necessárias para compilar dependências nativas
 RUN apk add --no-cache git python3 make g++
-RUN cd /hackaton-front/nexusCareFront && npm install
-RUN git clone https://github.com/dennerborba/hackaton-front.git
-
 RUN npm install -g @angular/cli@17.0.3
 
 # Instale as dependências do projeto
