@@ -1,5 +1,4 @@
 FROM postgres:16-alpine
-RUN apt-get update && apt-get upgrade -y
 EXPOSE 5432
 WORKDIR /postgres
 ENV POSTGRES_PASSWORD=postgres
