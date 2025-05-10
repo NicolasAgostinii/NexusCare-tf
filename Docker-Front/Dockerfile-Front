@@ -14,4 +14,4 @@ EXPOSE 4200
 RUN apk add --no-cache libc6-compat
 
 RUN npm install
-CMD ["npm", "run", "start-docker","ng server"]
+CMD ["npm", "run", "start-docker","ng serv"]
