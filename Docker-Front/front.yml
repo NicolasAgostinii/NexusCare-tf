@@ -14,11 +14,11 @@ services:
     command: sh -c "npm install && npm start"
     environment:
       - NODE_ENV=development
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4200"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
+  #  healthcheck:
+  #    test: ["CMD", "curl", "-f", "http://localhost:4200"]
+  #    interval: 10s
+  #    timeout: 5s
+  #    retries: 3
 
 volumes:
   node_modules:
