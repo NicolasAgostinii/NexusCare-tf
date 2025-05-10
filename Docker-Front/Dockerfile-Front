@@ -1,20 +1,13 @@
-# Usa imagem leve com Node.js
+# Usa uma imagem leve do Node.js com Alpine Linux
 FROM node:18-alpine
 
-# Cria diretório de trabalho
+# Define o diretório de trabalho dentro do container
 WORKDIR /app
 
-# Copia o conteúdo do projeto Angular para dentro do contêiner
+# Copia os arquivos da aplicação Angular para o diretório de trabalho
 COPY ./hackaton-front/nexusCareFront/ /app/
 
-# Instala dependências do sistema necessárias para bibliotecas nativas
+# Instala dependências do sistema para compilar pacotes nativos, se necessário
 RUN apk add --no-cache git python3 make g++
 
-# Instala dependências do Node.js
-RUN npm install
-
-# Expõe a porta padrão usada pelo Angular CLI
-EXPOSE 4200
-
-# Comando padrão ao iniciar o container
-CMD ["npm", "start"]
+# Instala as dependências
