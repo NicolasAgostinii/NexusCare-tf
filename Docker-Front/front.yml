@@ -3,8 +3,8 @@ version: '3.8'
 services:
   angular-app:
     build:
-       context: ./hackaton-front/nexusCareFront
-       dockerfile: Dockerfile-Front
+      context: .                          # <- Agora o Docker vê tudo a partir da raiz
+      dockerfile: Dockerfile-Front        # <- Dockerfile permanece fora da pasta do app
     ports:
       - "80:4200"
     volumes:
