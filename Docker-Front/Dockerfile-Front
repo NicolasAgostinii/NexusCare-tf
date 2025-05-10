@@ -1,15 +1,20 @@
+# Usa imagem leve com Node.js
 FROM node:18-alpine
 
-WORKDIR /hackaton-front/nexusCareFront
-COPY . /hackaton-front/nexusCareFront/
-# Instale o git e ferramentas necessárias para compilar dependências nativas
-RUN apk add --no-cache git
-RUN npm install -g @angular/cli@17.0.3
+# Cria diretório de trabalho
+WORKDIR /app
 
-# Instale as dependências do projeto
+# Copia o conteúdo do projeto Angular para dentro do contêiner
+COPY ./hackaton-front/nexusCareFront/ /app/
+
+# Instala dependências do sistema necessárias para bibliotecas nativas
+RUN apk add --no-cache git python3 make g++
+
+# Instala dependências do Node.js
 RUN npm install
 
+# Expõe a porta padrão usada pelo Angular CLI
 EXPOSE 4200
 
-# Inicie o servidor Angular
-CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200", "--disable-host-check"]
+# Comando padrão ao iniciar o container
+CMD ["npm", "start"]
