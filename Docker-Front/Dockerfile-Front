@@ -1,7 +1,7 @@
 FROM node:18-alpine
 
 WORKDIR /hackaton-front/nexusCareFront
-COPY ./hackaton-front/nexusCareFront/ /hackaton-front/nexusCareFront/
+COPY . /hackaton-front/nexusCareFront/
 # Instale o git e ferramentas necessárias para compilar dependências nativas
 RUN apk add --no-cache git
 RUN npm install -g @angular/cli@17.0.3
