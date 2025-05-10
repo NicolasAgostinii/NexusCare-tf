@@ -12,4 +12,4 @@ RUN apk add --no-cache git python3 make g++
 EXPOSE 4200
 # Instala as dependências
 RUN npm install
-CMD ["npm", "run", "start-docker"]
+CMD ["npm", "run", "start-docker","ng server"]
