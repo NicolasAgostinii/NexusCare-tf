@@ -9,5 +9,7 @@ COPY ./hackaton-front/nexusCareFront/ /app/
 
 # Instala dependências do sistema para compilar pacotes nativos, se necessário
 RUN apk add --no-cache git python3 make g++
-
+EXPOSE 4200
 # Instala as dependências
+RUN npm install
+CMD ["npm", "run", "start-docker"]
